@@ -1,0 +1,51 @@
+.footer{
+    border: solid red 2px;
+    margin: 100px 200px 20px 200px;
+
+    .top{
+        display: flex;
+        gap: 50px;
+
+        .item{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: justify;
+            font-size: 14px;
+            // color: #777;
+
+            h1{
+                font-size: 18px;
+                font-weight: 500;
+                color: #555;
+            }
+
+            span{
+                color: #777;
+            }
+        }
+    }
+
+    .bottom{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        align-items: center;
+        font-size: 13px;
+        color:#777;
+        
+        .left{
+            display: flex;
+            align-items: center;
+
+            .credit{
+                margin-left: 20px;
+            }
+        }
+        .right{
+            display: flex;
+        }
+    }
+    
+}
