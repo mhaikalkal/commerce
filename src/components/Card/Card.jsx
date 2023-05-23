@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import './Card.scss'
 
 const Card = (props) => {
-  console.log(props)
-  const {id, img, img2, title, isNew, oldPrice, price} = props
+  // console.log(props)
+  const {id, img, img2, title, slug, isNew, oldPrice, price} = props
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`/product/${slug}`} key={id}>
       <div className='card'>
         <div className="image">
           {isNew && <span>New Item</span>}

@@ -1,7 +1,8 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet
+  Outlet,
+  ScrollRestoration,
 } from "react-router-dom";
 
 import Home from "./pages/Home/Home"
@@ -47,15 +48,15 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element: <Home/>
+        element: [<Home/>, <ScrollRestoration/>]  // ini bug fix, soalnya pas klik link, page nya muncul di tengah, bukan dari atas.
       },
       {
-        path:"/products/:id",
-        element: <Products/>
+        path:"/products/:slug",
+        element: [<Products/>, <ScrollRestoration/>]
       },
       {
-        path:"/product/:id",
-        element: <Product/>
+        path:"/product/:slug",
+        element: [<Product/>, <ScrollRestoration/>]
       }
     ]
   }

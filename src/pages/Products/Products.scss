@@ -1,1 +1,54 @@
-.products{}
+.products{
+    // height: 100%;
+    display: flex;
+    // overflow: hidden; // position sticky gaakan work kalau parentny ada overflow hidden
+    padding: 20px 50px;
+
+    .left{
+        flex: 1;
+        position: sticky;
+        height: 100%;
+        top: 50px; // after scroll 50px dia ikutan stay di layar
+
+        .filterItem{
+            margin-bottom: 20px;
+
+            h2{
+                font-weight: 450;
+            }
+
+            .inputItem{
+                margin-bottom: 5px;
+
+                label{
+                    margin-left: 5px;
+                }
+
+                .pricelabel:first-child{
+                    margin-right: 10px;
+                }
+
+                .pricelabel:last-child{
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    .right{
+        flex: 3;
+
+        .container{
+            width: 100%;
+            height: 300px;
+            margin-bottom: 50px;
+
+            .catImage{
+                border-radius: 8px;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
