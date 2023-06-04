@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Card from './../Card/Card'
 import './FeaturedProducts.scss'
 // import Items from '../../data/Items'
-import axios from "axios"
+import useFetch from '../../hooks/useFetch'
 
 const FeaturedProducts = ({type}) => {
+  const {loading, data, error} = useFetch(`/products?populate=*&[filters][type][$eqi]=${type}`)
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     // populate=* adalah ambil semua data dari strapi, sama strapi biasa diblock alasan keamanan
+  //     try{
+  //       const res = await axios.get(process.env.REACT_APP_API_URL + `/products?populate=*&[filters][type][$eqi]=${type}`, 
+  //         {
+  //           headers: {
+  //             Authorization:"bearer " + process.env.REACT_APP_API_TOKEN
+  //           },
+  //         })
+  //         // karena pas di console log, ada data didalem data.
+  //         setData(res.data.data) 
+  //     } catch(err) {
+  //       console.log(err)
+  //     }
+  //   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // populate=* adalah ambil semua data dari strapi, sama strapi biasa diblock alasan keamanan
-      try{
-        const res = await axios.get(process.env.REACT_APP_API_URL + "/products?populate=*", 
-          {
-            headers: {
-              Authorization:"bearer " + process.env.REACT_APP_API_TOKEN
-            },
-          })
-          // karena pas di console log, ada data didalem data.
-          setData(res.data.data) 
-      } catch(err) {
-        console.log(err)
-      }
-    }
-
-    // panggil data
-    fetchData()
-  }, [])
+  //   // panggil data
+  //   fetchData()
+  // }, [])
 
   return (
     <div className='featuredProducts'>
@@ -37,9 +37,9 @@ const FeaturedProducts = ({type}) => {
       </div>
       <div className="bottom">
         {
-          data.map((item) => {
-            return <Card key={item.id} {...item.attributes} />
-          } )
+        error ? "Something Went Wrong.." : (loading ? "loading" : data.map((item) => {
+            return <Card key={item.id} {...item} />
+          }))
         }
       </div>
 

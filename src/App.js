@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: [<Products/>, <ScrollRestoration/>]
       },
       {
-        path:"/product/:slug",
+        path:"/product/:id",
         element: [<Product/>, <ScrollRestoration/>]
       }
     ]
