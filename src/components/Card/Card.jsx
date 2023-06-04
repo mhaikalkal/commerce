@@ -5,19 +5,24 @@ import './Card.scss'
 
 const Card = (props) => {
   // console.log(props)
-  const {id, img, img2, title, slug, isNew, oldPrice, price} = props
+  const {id, img, title, slug, isNew, price, sale} = props;
+
+  let saleTotal = (price * sale[1]/100)
+  let oldPrice = price + saleTotal
+
   return (
     <Link to={`/product/${slug}`} key={id}>
       <div className='card'>
+
         <div className="image">
           {isNew && <span>New Item</span>}
-          <img src={img} alt="" className="mainImg" />
-          <img src={img2} alt="" className="secondImg" />
+          <img src={process.env.REACT_APP_UPLOAD_URL + img.data[0].attributes.url} alt="" className="mainImg" />
+          <img src={process.env.REACT_APP_UPLOAD_URL + img.data[1].attributes.url} alt="" className="secondImg" />
         </div>
         <h3>{title}</h3>
         <div className="prices">
           <p className='newPrice'>Rp. {price}</p>
-          <p className='oldPrice'>Rp. {oldPrice}</p>
+          {sale[0] && <p className='oldPrice'>Rp. {oldPrice}</p>}
         </div>
 
       </div>

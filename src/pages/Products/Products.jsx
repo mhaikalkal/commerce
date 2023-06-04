@@ -2,56 +2,7 @@ import React, { useState } from 'react'
 import './Products.scss'
 import List from '../../components/List/List'
 import { useParams } from 'react-router-dom'
-
-const data = [
-  {
-    id: 1,
-    title: 'Shoes',
-    slug: 'shoes'
-  },
-  {
-    id: 2,
-    title: 'T-Shirt',
-    slug: 't-shirt'
-  },
-  {
-    id: 3,
-    title: 'Sweater',
-    slug: 'weater'
-  },
-  // {
-  //   id: 4,
-  //   title: 'Men'
-  // },
-  // {
-  //   id: 5,
-  //   title: 'Women'
-  // },
-  // {
-  //   id: 6,
-  //   title: 'Children'
-  // },
-  {
-    id: 7,
-    title: 'Accessories',
-    slug: 'accessories',
-  },
-  {
-    id: 8,
-    title: 'Hat',
-    slug: 'hat',
-  },
-  {
-    id: 9,
-    title: 'Hoodie',
-    slug: 'hoodie'
-  },
-  {
-    id: 10,
-    title: 'Jeans',
-    slug: 'jeans'
-  },
-]
+import Category from '../../data/Category'
 
 const Products = () => {
   
@@ -73,7 +24,7 @@ const Products = () => {
         <div className="filterItem">
           <h2>Products Categories</h2>
 
-          {data.map(category => {
+          {Category.map(category => {
             return (
             <div className="inputItem">
               <input type="checkbox" name="" id={category.id} value={category.id} />
