@@ -31,7 +31,7 @@ const Product = () => {
       <div className="right">
         <h1 className="title" key={productId}>{data?.attributes?.title}</h1>
         <span className="price">Rp. {currency(data?.attributes?.price)} ,-</span>
-        <p className='desc'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio harum consectetur, sunt eligendi laudantium modi repellat, numquam atque temporibus veniam omnis quod hic nesciunt nulla adipisci sint saepe voluptas itaque placeat! Labore delectus quaerat voluptatum consectetur odit quae quod obcaecati neque doloribus error natus, quis nobis dolorum, nisi ipsum blanditiis cupiditate vitae beatae voluptates quibusdam commodi. Rem est repellendus eligendi.</p>
+        <p className='desc'>{data?.attributes?.desc}</p>
         
         <div className="qty">
           <button onClick={() => setQuantity((prev) => prev === 1 ? prev : prev - 1 )}>-</button>
