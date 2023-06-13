@@ -1,50 +1,43 @@
 import React from 'react'
 import './Cart.scss'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-
-const data = [
-  {
-    id: 1,
-    img: "https://images.pexels.com/photos/1972115/pexels-photo-1972115.jpeg?auto=compress&cs=tinys rgb&w=1600",
-    img2: "https://images.pexels.com/photos/1163194/pexels-photo-1163194.jpeg?auto=compress&cs=tinys rgb&w=1600",
-    title: "Long Sleeve Graphic T-shirt",
-    slug: "long-sleeve-graphic-t-shirt",
-    isNew: true,
-    oldPrice: 200000,
-    price: 75000,
-    },
-    {
-      id: 2,
-      img: "https://images.pexels.com/photos/1759622/pexels-photo-1759622.jpeg?auto=compress&cs=tinys rgb&w=1600",
-      title: "Leather Coat",
-      slug: "leather-coat",
-      isNew: true,
-      oldPrice: 600000,
-      price: 250000,
-    },
-]
+import { useDispatch, useSelector } from 'react-redux';
+import { currency } from '../../currency';
+import { removeItem } from '../../redux/cartReducer';
 
 const Cart = () => {
+  // state ini = state di redux/store. terus kalo state.cart maka state 'cart' di redux/cartReducer.
+  const products = useSelector((state) => state.cart.products)
+  const dispatch = useDispatch()
+
+  const totalPrice = () => {
+    let total = 0
+    products.forEach((item) => (total += item.quantity * item.price))
+    return currency(total);
+  }
+
+  console.log(totalPrice)
+
   return (
     <div className='cart'>
       <h2>Products in your cart</h2>
-      {data?.map(item => {
+      {products?.map(item => {
         return (
           <div className="item" key={item.id}>
-            <img src={item.img} alt="" className=''/>
+            <img src={process.env.REACT_APP_UPLOAD_URL + item.img} alt="" className=''/>
             <div className="details">
               <h4>{item.title}</h4>
-              <p>{item.desc?.subString(0, 70)}</p>
-              <div className="price">1 x {item.price}</div>
+              <p>{item.desc?.toString().substring(0, 70)}</p>
+              <div className="price">{item.quantity} x {item.price}</div>
             </div>
-          <DeleteOutlineIcon className='delete'/>
+          <DeleteOutlineIcon className='delete' onClick={() => dispatch(removeItem(item.id))}/>
           </div>
         )
       })}
 
       <div className="total">
         <span>SUBTOTAL</span>
-        <span>Rp. 232.153.611</span>
+        <span>Rp. {totalPrice()}</span>
       </div>
 
       <button>PROCEED TO CHECKOUT</button>

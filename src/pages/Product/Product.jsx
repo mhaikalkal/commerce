@@ -8,6 +8,8 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 import { currency } from '../../currency';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/cartReducer';
 
 const Product = () => {
   const productId = useParams().id
@@ -15,6 +17,8 @@ const Product = () => {
   const {loading, data, error} = useFetch(`/products/${productId}?populate=*`)
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
+
+  const dispatch = useDispatch()
 
   return (
     <div className='product'>
@@ -39,7 +43,16 @@ const Product = () => {
           <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
         </div>
 
-        <button className='add'>
+        <button className='add' onClick={() => dispatch(addToCart(
+          {
+            id: data.id,
+            title: data.attributes.title,
+            desc: data?.attributes.desc,
+            img: data?.attributes?.img?.data[0]?.attributes?.url,
+            price: data.attributes.price,
+            quantity: quantity
+          }
+        ))}>
           <AddShoppingCartIcon />
           Add to cart
         </button>
